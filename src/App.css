@@ -10,6 +10,8 @@
 
 :root {
   font-family: "Press Start 2P", cursive;
+  --red: #fc0000;
+  --white: #fefeff;
 }
 
 #root {
@@ -19,6 +21,7 @@
   background-size: cover;
   background-position: center;
   cursor: url(./glove_cursor.png), auto;
+  color: #212529;
 }
 
 a,

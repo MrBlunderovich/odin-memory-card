@@ -2,15 +2,24 @@ import { useState } from "react";
 import "./App.css";
 import StartModal from "./components/StartModal/StartModal";
 import { Difficulty } from "./declarations";
+import Header from "./components/Header/Header";
 
 function App() {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(100);
 
   console.log(isPlaying, difficulty);
   return (
     <>
-      {!isPlaying && (
+      {isPlaying ? (
+        <Header
+          setIsPlaying={setIsPlaying}
+          score={score}
+          highScore={highScore}
+        />
+      ) : (
         <StartModal setIsPlaying={setIsPlaying} setDifficulty={setDifficulty} />
       )}
     </>
