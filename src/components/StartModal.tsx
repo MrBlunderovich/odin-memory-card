@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Difficulty } from "../../declarations";
+import { Difficulty } from "../declarations";
 
 type Props = {
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;

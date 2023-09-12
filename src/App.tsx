@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "./App.css";
-import StartModal from "./components/StartModal/StartModal";
+import StartModal from "./components/StartModal";
 import { Difficulty } from "./declarations";
-import Header from "./components/Header/Header";
-import Game from "./components/Game/Game";
+import Header from "./components/Header";
+import Game from "./components/Game";
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(true);
