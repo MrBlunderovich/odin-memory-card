@@ -53,7 +53,7 @@ const gameSlice = createSlice({
   reducers: {
     startNewGame: (state, action) => {
       state.inAction = true;
-      state.difficulty = action.payload.difficulty;
+      state.difficulty = action.payload;
     },
     abortGame: (state) => {
       state.inAction = false;
@@ -74,7 +74,7 @@ export const gameActions = gameSlice.actions;
 function pickRandomIDs(quantity: number) {
   return Array(quantity)
     .fill(null)
-    .map((item) => {
+    .map((_) => {
       return Math.floor(Math.random() * POKEMON_TOTAL + 1);
     });
 }

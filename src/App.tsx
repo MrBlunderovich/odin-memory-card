@@ -11,7 +11,7 @@ function App() {
   // const [score, setScore] = useState(0);
   // const [highScore, setHighScore] = useState(100);
 
-  console.log({ inAction, difficulty });
+  //console.log({ inAction, difficulty });
   return (
     <div className="_wrapper font-pressStart cursor-default min-h-screen [background-image:_url('/pokemon-bg.png')] bg-cover bg-center text-MainFont">
       {inAction ? (

@@ -6,48 +6,30 @@ import Header from "./Header";
 import { useEffect } from "react";
 import { fetchRandomPokemon } from "../redux/gameSlice";
 
-function randomOffset() {
-  return Math.floor(Math.random() * 900);
-}
+const difficultyMap = {
+  easy: 5,
+  medium: 10,
+  hard: 15,
+};
 
-let offset = 30;
-const LIMIT = 10;
-const pokemonQueries = Array(LIMIT)
-  .fill(0)
-  .map(() => offset++);
-//console.log(pokemonQueries);
-
-// type Props = { difficulty: Difficulty };
-// export default function Game({ difficulty }: Props) {
 export default function Game() {
   const dispatch = useAppDispatch();
-  const { pokemonCards, difficulty, score, highScore } = useAppSelector(
-    (state) => state.game
-  );
+  const { pokemonCards, difficulty, score, highScore, inAction } =
+    useAppSelector((state) => state.game);
+  const numberOfCards = difficultyMap[difficulty];
 
   useEffect(() => {
-    dispatch(fetchRandomPokemon(10));
+    dispatch(fetchRandomPokemon(numberOfCards));
   }, []);
 
-  const pokemons = useQueries({
-    queries: pokemonQueries.map((id) => {
-      return {
-        queryKey: ["pokemon", id],
-        queryFn: () => getPokemonById(id),
-        staleTime: Infinity,
-        enabled: pokemonQueries.length > 0,
-      };
-    }),
-  });
-  //console.log({ pokemons });
-  const success = pokemons.every((item) => item.isSuccess);
-  //console.log("IS_SUCCESS: ", success);
-  const cardData = success
-    ? pokemons.map((p) => ({
-        name: p.data.name,
-        imgUrl: p.data.sprites.front_default,
+  const cardData = pokemonCards
+    ? pokemonCards.map((p) => ({
+        name: p.name,
+        imgUrl: p.sprites.front_default,
       }))
     : [];
+
+  console.log({ pokemonCards, difficulty, score, highScore, inAction });
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
