@@ -67,12 +67,15 @@ export default function Game({ difficulty }: Props) {
       }))
     : [];
   return (
-    <main className={styles.game}>
+    <main className="mt-8 mx-auto px-4 max-w-[1200px] flex justify-center flex-wrap gap-4">
       {cardData.map((item) => (
-        <div key={item.name} className={styles.card}>
-          <img src={item.imgUrl} alt={item.name} />
+        <button
+          className="_card appearance-none border-none rounded-md w-[180px] h-[250px] bg-[#0003] text-xxs flex flex-col items-center gap-4 text-PokeWhite"
+          key={item.name}
+        >
+          <img src={item.imgUrl} width="200%" alt={item.name} />
           <p>{item.name}</p>
-        </div>
+        </button>
       ))}
       {/* {Array(16)
         .fill("card")
