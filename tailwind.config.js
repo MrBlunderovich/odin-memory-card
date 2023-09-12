@@ -8,13 +8,14 @@ export default {
         DarkText: "#181010",
         PokeRed: "#fc0000",
         PokeWhite: "#fefeff",
+        MainFont: "#212529",
       },
       fontSize: {
         xxs: "0.5rem",
       },
       fontFamily: {
         pokemon: "Pokemon",
-        pressStart: "Press Start 2P",
+        pressStart: "Press_Start_2P",
       },
       cursor: {
         glovePointer: 'url("./glove_cursor_pointer.png") 14 0, pointer',

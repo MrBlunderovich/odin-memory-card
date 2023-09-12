@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import StartModal from "./components/StartModal";
 import { Difficulty } from "./declarations";
 import Header from "./components/Header";
@@ -13,7 +12,7 @@ function App() {
 
   console.log({ isPlaying, difficulty });
   return (
-    <div className="wrapper cursor-default">
+    <div className="_wrapper font-pressStart cursor-default min-h-screen [background-image:_url('/pokemon-bg.png')] bg-cover bg-center text-MainFont">
       {isPlaying ? (
         <>
           <Header
