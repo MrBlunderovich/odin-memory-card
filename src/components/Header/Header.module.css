@@ -24,7 +24,6 @@
 
   & > span:last-of-type {
     color: var(--white, white);
-    margin-right: 0.2rem;
   }
 
   &:focus-visible {

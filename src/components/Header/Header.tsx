@@ -1,6 +1,3 @@
-import {} from "react";
-import styles from "./Header.module.css";
-
 type Props = {
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
   score: number;
@@ -8,17 +5,21 @@ type Props = {
 };
 export default function Header({ setIsPlaying, score, highScore }: Props) {
   return (
-    <header className={styles.header}>
+    <header className="flex flex-col items-center gap-6 py-8">
       <button
-        className={styles.logoButton}
+        className="border-none bg-transparent flex items-center text-2xl focus-visible:[outline:1px_solid_black]"
         aria-label="go to start screen"
         onClick={() => setIsPlaying(false)}
       >
-        <img src="./pokeball.png" alt="pokeball" />
-        <span>Poké</span>
-        <span>Memo</span>
+        <img
+          className="mr-2 -translate-y-[5%]"
+          src="./pokeball.png"
+          alt="pokeball"
+        />
+        <span className="text-PokeRed">Poké</span>
+        <span className="text-PokeWhite mr-1">Memo</span>
       </button>
-      <div className={styles.scoreBoard}>
+      <div className="flex gap-8 text-sm">
         <span>SCORE: {score}</span>
         <span>HIGH SCORE: {highScore}</span>
       </div>

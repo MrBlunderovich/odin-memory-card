@@ -20,16 +20,6 @@ export default {
         glovePointer: 'url("./glove_cursor_pointer.png") 14 0, pointer',
         default: 'url("./glove_cursor.png"), auto',
       },
-      /* before: {
-        arrowPointer: {
-          position: "absolute",
-          left: "0",
-          transform: "translate(-100%, -5%)",
-          content: ">",
-          fontFamily: ["pressStart", "monospace"],
-          fontSize: "0.8rem",
-        },
-      }, */
     },
   },
   plugins: [],
