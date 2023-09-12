@@ -1,18 +1,21 @@
 import { ReactNode } from "react";
 import { Difficulty } from "../declarations";
+import { useAppDispatch } from "../redux/hooks";
+import { gameActions } from "../redux/gameSlice";
 
-type Props = {
-  setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
-  setDifficulty: React.Dispatch<React.SetStateAction<Difficulty>>;
-};
+// type Props = {
+//   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
+//   setDifficulty: React.Dispatch<React.SetStateAction<Difficulty>>;
+// };
 
-export default function StartModal({ setIsPlaying, setDifficulty }: Props) {
+export default function StartModal() {
+  const dispatch = useAppDispatch();
+
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const difficulty = form.difficulty.value as Difficulty;
-    setIsPlaying(true);
-    setDifficulty(difficulty);
+    dispatch(gameActions.startNewGame(difficulty));
   }
 
   return (

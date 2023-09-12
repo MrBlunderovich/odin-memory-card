@@ -1,15 +1,19 @@
+import { gameActions } from "../redux/gameSlice";
+import { useAppDispatch } from "../redux/hooks";
+
 type Props = {
-  setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
   score: number;
   highScore: number;
 };
-export default function Header({ setIsPlaying, score, highScore }: Props) {
+export default function Header({ score, highScore }: Props) {
+  const dispatch = useAppDispatch();
+
   return (
     <header className="flex flex-col items-center gap-6 py-8">
       <button
         className="border-none bg-transparent flex items-center text-2xl focus-visible:[outline:1px_solid_black]"
         aria-label="go to start screen"
-        onClick={() => setIsPlaying(false)}
+        onClick={() => dispatch(gameActions.abortGame())}
       >
         <img
           className="mr-2 -translate-y-[5%]"
