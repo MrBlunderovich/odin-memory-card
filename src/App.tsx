@@ -6,14 +6,14 @@ import Header from "./components/Header/Header";
 import Game from "./components/Game/Game";
 
 function App() {
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(100);
 
   console.log({ isPlaying, difficulty });
   return (
-    <>
+    <div className="wrapper cursor-default">
       {isPlaying ? (
         <>
           <Header
@@ -26,7 +26,7 @@ function App() {
       ) : (
         <StartModal setIsPlaying={setIsPlaying} setDifficulty={setDifficulty} />
       )}
-    </>
+    </div>
   );
 }
 

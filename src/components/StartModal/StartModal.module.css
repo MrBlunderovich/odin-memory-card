@@ -1,11 +1,11 @@
-.backdrop {
+/* .backdrop {
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #00000030;
-}
+} */
 
 .form {
   background-color: #fff;
@@ -21,7 +21,7 @@
   }
 }
 
-.radioset {
+/* .radioset {
   position: relative;
   appearance: none;
   border: none;
@@ -30,9 +30,9 @@
   gap: 2rem;
   font-size: 0.7rem;
   margin-block: 1rem;
-}
+} */
 
-.button {
+/* .button {
   display: block;
   appearance: none;
   border: none;
@@ -44,12 +44,12 @@
   &:focus-visible {
     outline: none;
   }
-}
+} */
 
-.radioset > label,
+/* .radioset > label,
 .button {
   position: relative;
-}
+} */
 
 .button:hover::before,
 .button:focus-visible::before,
@@ -62,15 +62,15 @@
   font-size: 0.8rem;
 }
 
-.radioLabel {
+/* .radioLabel {
   text-transform: capitalize;
 
   &:has(.radio:focus-visible) {
     text-decoration: underline;
   }
-}
+} */
 
-.radio {
+/* .radio {
   appearance: none;
   width: 1px;
   height: 1em;
@@ -85,9 +85,9 @@
     content: ">";
     transform: translate(-100%, -10%);
   }
-}
+} */
 
-.radioLabel,
+/* .radioLabel,
 .button {
   cursor: url("./glove_cursor_pointer.png") 14 0, pointer;
-}
+} */

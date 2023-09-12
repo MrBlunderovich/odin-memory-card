@@ -20,7 +20,7 @@
   background-image: url("/pokemon-bg.png");
   background-size: cover;
   background-position: center;
-  cursor: url(./glove_cursor.png), auto;
+  /* cursor: url(./glove_cursor.png), auto; */
   color: #212529;
 }
 
