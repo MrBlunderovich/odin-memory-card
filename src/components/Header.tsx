@@ -1,11 +1,10 @@
 import { gameActions } from "../redux/gameSlice";
-import { useAppDispatch } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
-type Props = {
-  score: number;
-  highScore: number;
-};
-export default function Header({ score, highScore }: Props) {
+export default function Header() {
+  const { numberOfCards, score, highScore, checkedIds } = useAppSelector(
+    (state) => state.game
+  );
   const dispatch = useAppDispatch();
 
   return (
@@ -27,6 +26,7 @@ export default function Header({ score, highScore }: Props) {
         <span>SCORE: {score}</span>
         <span>HIGH SCORE: {highScore}</span>
       </div>
+      <p>{`${checkedIds.length}/${numberOfCards}`}</p>
     </header>
   );
 }

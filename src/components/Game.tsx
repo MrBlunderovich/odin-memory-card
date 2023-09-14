@@ -3,50 +3,85 @@ import { getPokemon, getPokemonBatch, getPokemonById } from "../api/pokeapi";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { GameState } from "../declarations";
 import Header from "./Header";
-import { useEffect } from "react";
-import { fetchRandomPokemon } from "../redux/gameSlice";
+import { useEffect, useState } from "react";
+import { fetchRandomPokemon, gameActions } from "../redux/gameSlice";
+import Loader from "./Loader";
 
-const difficultyMap = {
-  easy: 5,
-  medium: 10,
-  hard: 15,
-};
+function fisherYatesShuffle(array: any[]) {
+  let oldElement;
+  for (let i = array.length - 1; i > 0; i--) {
+    let rand = Math.floor(Math.random() * (i + 1));
+    oldElement = array[i];
+    array[i] = array[rand];
+    array[rand] = oldElement;
+  }
+  return array;
+}
 
 export default function Game() {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
-  const { pokemonCards, difficulty, score, highScore, inAction } =
-    useAppSelector((state) => state.game);
-  const numberOfCards = difficultyMap[difficulty];
+  const {
+    pokemonCards,
+    numberOfCards,
+    score,
+    highScore,
+    inAction,
+    checkedIds,
+  } = useAppSelector((state) => state.game);
+  const pokemonCardsLength = pokemonCards.length;
 
   useEffect(() => {
-    dispatch(fetchRandomPokemon(numberOfCards));
-  }, []);
+    if (pokemonCardsLength === 0) {
+      setIsLoading(true);
+      dispatch(fetchRandomPokemon())
+        .unwrap()
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, [pokemonCardsLength]);
 
-  const cardData = pokemonCards
-    ? pokemonCards.map((p) => ({
-        name: p.name,
-        imgUrl: p.sprites.front_default,
-      }))
-    : [];
+  const cardData = fisherYatesShuffle(
+    pokemonCards.map((p) => ({
+      id: p.id,
+      name: p.name,
+      imgUrl: p.sprites.front_default,
+    }))
+  );
 
-  console.log({ pokemonCards, difficulty, score, highScore, inAction });
+  console.log({
+    pokemonCards,
+    numberOfCards,
+    score,
+    highScore,
+    inAction,
+    checkedIds,
+  });
+  console.log("checkedIds: ", checkedIds);
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
   return (
     <>
-      <Header score={score} highScore={highScore} />
-      <main className="mt-8 mx-auto px-4 max-w-[1200px] flex justify-center flex-wrap gap-4">
-        {cardData.map((item) => (
-          <button
-            className="_card appearance-none border-none rounded-md w-[180px] h-[250px] bg-[#0003] text-xxs flex flex-col items-center gap-4 text-PokeWhite"
-            key={item.name}
-          >
-            <img src={item.imgUrl} width="200%" alt={item.name} />
-            <p>{item.name}</p>
-          </button>
-        ))}
+      <Header />
+      <main className="mt-8 mx-auto px-4 lg:px-8 flex justify-center flex-wrap gap-4">
+        {/* {isLoading && <Loader />} */}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          cardData?.map((item) => (
+            <button
+              className="_card appearance-none border-none rounded-md w-[180px] h-[250px] bg-[#0003] text-xxs flex flex-col items-center gap-4 text-PokeWhite"
+              key={item.name}
+              onClick={() => dispatch(gameActions.cardClick({ id: item.id }))}
+            >
+              <img src={item.imgUrl} width="200%" alt={item.name} />
+              <p>{item.name}</p>
+            </button>
+          ))
+        )}
       </main>
     </>
   );

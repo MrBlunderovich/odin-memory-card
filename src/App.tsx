@@ -5,7 +5,7 @@ import Game from "./components/Game";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 
 function App() {
-  const { inAction, difficulty } = useAppSelector((state) => state.game);
+  const { inAction } = useAppSelector((state) => state.game);
   // const [isPlaying, setIsPlaying] = useState(true);
   // const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   // const [score, setScore] = useState(0);

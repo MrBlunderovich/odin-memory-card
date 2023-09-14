@@ -1,9 +1,18 @@
 export type Difficulty = "easy" | "medium" | "hard";
 
 export type GameState = {
-  difficulty: Difficulty;
+  // difficulty: Difficulty;
+  numberOfCards: number;
   inAction: boolean;
-  pokemonCards: any[] | null;
+  pokemonCards: any[];
   score: number;
   highScore: number;
+  checkedIds: number[];
 };
+
+/* export type Pokemon = {
+  id: number;
+  name: string;
+  imgUrl: string;
+  [key: string]: unknown;
+}; */
