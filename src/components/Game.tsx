@@ -1,4 +1,3 @@
-import { useQueries, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getPokemon, getPokemonBatch, getPokemonById } from "../api/pokeapi";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { GameState } from "../declarations";
@@ -6,6 +5,7 @@ import Header from "./Header";
 import { useEffect, useState } from "react";
 import { fetchRandomPokemon, gameActions } from "../redux/gameSlice";
 import Loader from "./Loader";
+import cardReverseImage from "../assets/card-back.png";
 
 function fisherYatesShuffle(array: any[]) {
   let oldElement;
@@ -58,7 +58,7 @@ export default function Game() {
     inAction,
     checkedIds,
   });
-  console.log("checkedIds: ", checkedIds);
+  //console.log("checkedIds: ", checkedIds);
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -66,20 +66,29 @@ export default function Game() {
   return (
     <>
       <Header />
-      <main className="mt-8 mx-auto px-4 lg:px-8 flex justify-center flex-wrap gap-4">
+      <main className="mt-8 mx-auto px-4 lg:px-8 flex justify-center flex-wrap gap-4 [perspective:1000px]">
         {/* {isLoading && <Loader />} */}
         {isLoading ? (
           <Loader />
         ) : (
           cardData?.map((item) => (
-            <button
-              className="_card appearance-none border-none rounded-md w-[180px] h-[250px] bg-[#0003] text-xxs flex flex-col items-center gap-4 text-PokeWhite"
+            <div
+              className="relative [transform-style:preserve-3d] w-[180px] h-[250px]"
               key={item.name}
-              onClick={() => dispatch(gameActions.cardClick({ id: item.id }))}
             >
-              <img src={item.imgUrl} width="200%" alt={item.name} />
-              <p>{item.name}</p>
-            </button>
+              <button
+                className="_card w-full h-full absolute appearance-none border-none rounded-md bg-[#0003] text-xxs flex flex-col items-center gap-4 text-PokeWhite"
+                onClick={() => dispatch(gameActions.cardClick({ id: item.id }))}
+              >
+                <img src={item.imgUrl} width="100%" alt={item.name} />
+                <p className="text-sm">{item.name}</p>
+              </button>
+              <img
+                className="absolute [transform:rotateY(180deg)_translateZ(1px)] opacity-0"
+                src={cardReverseImage}
+                alt="card reverse side"
+              />
+            </div>
           ))
         )}
       </main>
