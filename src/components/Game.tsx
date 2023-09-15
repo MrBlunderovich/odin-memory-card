@@ -2,7 +2,7 @@ import { getPokemon, getPokemonBatch, getPokemonById } from "../api/pokeapi";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { GameState } from "../declarations";
 import Header from "./Header";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchRandomPokemon, gameActions } from "../redux/gameSlice";
 import Loader from "./Loader";
 import cardReverseImage from "../assets/card-back.png";
@@ -19,6 +19,7 @@ function fisherYatesShuffle(array: any[]) {
 }
 
 export default function Game() {
+  const cardContainerRef = useRef<HTMLDivElement | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
   const {
@@ -42,6 +43,12 @@ export default function Game() {
     }
   }, [pokemonCardsLength]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      cardContainerRef.current?.classList.remove("flip");
+    }, 150);
+  });
+
   const cardData = fisherYatesShuffle(
     pokemonCards.map((p) => ({
       id: p.id,
@@ -49,6 +56,13 @@ export default function Game() {
       imgUrl: p.sprites.front_default,
     }))
   );
+
+  function handleCardClick(id: number) {
+    cardContainerRef.current?.classList.add("flip");
+    setTimeout(() => {
+      dispatch(gameActions.cardClick({ id }));
+    }, 350);
+  }
 
   console.log({
     pokemonCards,
@@ -66,30 +80,35 @@ export default function Game() {
   return (
     <>
       <Header />
-      <main className="mt-8 mx-auto px-4 lg:px-8 flex justify-center flex-wrap gap-4 [perspective:1000px]">
+      <main className="mt-8 mx-auto px-4 lg:px-8 [perspective:1000px]">
         {/* {isLoading && <Loader />} */}
         {isLoading ? (
           <Loader />
         ) : (
-          cardData?.map((item) => (
-            <div
-              className="relative [transform-style:preserve-3d] w-[180px] h-[250px]"
-              key={item.name}
-            >
-              <button
-                className="_card w-full h-full absolute appearance-none border-none rounded-md bg-[#0003] text-xxs flex flex-col items-center gap-4 text-PokeWhite"
-                onClick={() => dispatch(gameActions.cardClick({ id: item.id }))}
+          <div
+            className="_card-container flip group flex justify-center flex-wrap gap-4"
+            ref={cardContainerRef}
+          >
+            {cardData?.map((item) => (
+              <div
+                className="_card group-[.flip]:[rotate:y_180deg] [transition:rotate_300ms_linear] relative [transform-style:preserve-3d] w-[180px] h-[250px]"
+                key={item.name}
               >
-                <img src={item.imgUrl} width="100%" alt={item.name} />
-                <p className="text-sm">{item.name}</p>
-              </button>
-              <img
-                className="absolute [transform:rotateY(180deg)_translateZ(1px)] opacity-0"
-                src={cardReverseImage}
-                alt="card reverse side"
-              />
-            </div>
-          ))
+                <button
+                  className="_card-face  [backface-visibility:hidden] w-full h-full absolute appearance-none border-none rounded-md bg-[#0003] text-xxs flex flex-col items-center gap-4 text-PokeWhite"
+                  onClick={() => handleCardClick(item.id)}
+                >
+                  <img src={item.imgUrl} width="100%" alt={item.name} />
+                  <p className="text-sm">{item.name}</p>
+                </button>
+                <img
+                  className="_card-reverse [backface-visibility:hidden] absolute [transform:rotateY(180deg)]"
+                  src={cardReverseImage}
+                  alt="card reverse side"
+                />
+              </div>
+            ))}
+          </div>
         )}
       </main>
     </>

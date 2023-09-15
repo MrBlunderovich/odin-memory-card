@@ -21,6 +21,13 @@ export default {
         glovePointer: 'url("./glove_cursor_pointer.png") 14 0, pointer',
         default: 'url("./glove_cursor.png"), auto',
       },
+      /* transition: {
+        flip: {
+          transitionProperty: "transform",
+          transitionTimingFunction: "linear",
+          transitionDuration: "300ms",
+        },
+      }, */
     },
   },
   plugins: [],
