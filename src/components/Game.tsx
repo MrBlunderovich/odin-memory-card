@@ -1,6 +1,4 @@
-import { getPokemon, getPokemonBatch, getPokemonById } from "../api/pokeapi";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { GameState } from "../declarations";
 import Header from "./Header";
 import { useEffect, useRef, useState } from "react";
 import { fetchRandomPokemon, gameActions } from "../redux/gameSlice";

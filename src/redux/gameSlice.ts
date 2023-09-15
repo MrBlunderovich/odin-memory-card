@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Difficulty, GameState } from "../declarations";
-import { getPokemonById } from "../api/pokeapi";
 import { RootState } from "./store";
 
 const POKEMON_TOTAL = 1010;
