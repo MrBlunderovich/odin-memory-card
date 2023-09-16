@@ -19,10 +19,10 @@ export default function StartModal() {
   }
 
   return (
-    <div className="bg-Backdrop min-h-screen flex items-center justify-center">
+    <div className="bg-Backdrop animate-fadein min-h-screen flex items-center justify-center">
       {/*  */}
       <form
-        className="bg-white [&_*]:cursor-[inherit] [border-image:url('./pixel_border.png')_42_round] border-[20px] text-DarkText p-3 shadow-2xl"
+        className="bg-white animate-grow [&_*]:cursor-[inherit] [border-image:url('./pixel_border.png')_42_round] border-[20px] text-DarkText p-3 shadow-2xl"
         onSubmit={(e) => handleSubmit(e)}
       >
         <h2 className="text-center text-base">What would you like to do?</h2>

@@ -76,7 +76,6 @@ const gameSlice = createSlice({
         state.checkedIds = [];
         state.pokemonCards = [];
       }
-      //shuffle cards
     },
   },
 

@@ -3,7 +3,8 @@ import Header from "./Header";
 import { useEffect, useRef, useState } from "react";
 import { fetchRandomPokemon, gameActions } from "../redux/gameSlice";
 import Loader from "./Loader";
-import cardReverseImage from "../assets/card-back.png";
+import { PokemonCard } from "../declarations";
+import Card from "./Card";
 
 function fisherYatesShuffle(array: any[]) {
   let oldElement;
@@ -15,7 +16,7 @@ function fisherYatesShuffle(array: any[]) {
   }
   return array;
 }
-
+/////////////////////////////////////////////////////////////
 export default function Game() {
   const cardContainerRef = useRef<HTMLDivElement | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -48,11 +49,14 @@ export default function Game() {
   });
 
   const cardData = fisherYatesShuffle(
-    pokemonCards.map((p) => ({
-      id: p.id,
-      name: p.name,
-      imgUrl: p.sprites.front_default,
-    }))
+    pokemonCards.map(
+      (p) =>
+        ({
+          id: p.id,
+          name: p.name,
+          imgUrl: p.sprites.front_default,
+        } as PokemonCard)
+    )
   );
 
   function handleCardClick(id: number) {
@@ -79,7 +83,6 @@ export default function Game() {
     <>
       <Header />
       <main className="mt-8 mx-auto px-4 lg:px-8 [perspective:1000px]">
-        {/* {isLoading && <Loader />} */}
         {isLoading ? (
           <Loader />
         ) : (
@@ -88,23 +91,11 @@ export default function Game() {
             ref={cardContainerRef}
           >
             {cardData?.map((item) => (
-              <div
-                className="_card group-[.flip]:[rotate:y_180deg] [transition:rotate_300ms_linear] relative [transform-style:preserve-3d] w-[180px] h-[250px]"
+              <Card
                 key={item.name}
-              >
-                <button
-                  className="_card-face  [backface-visibility:hidden] w-full h-full absolute appearance-none border-none rounded-md bg-[#0003] text-xxs flex flex-col items-center gap-4 text-PokeWhite"
-                  onClick={() => handleCardClick(item.id)}
-                >
-                  <img src={item.imgUrl} width="100%" alt={item.name} />
-                  <p className="text-sm">{item.name}</p>
-                </button>
-                <img
-                  className="_card-reverse [backface-visibility:hidden] absolute [transform:rotateY(180deg)]"
-                  src={cardReverseImage}
-                  alt="card reverse side"
-                />
-              </div>
+                item={item}
+                handleCardClick={handleCardClick}
+              />
             ))}
           </div>
         )}

@@ -10,6 +10,12 @@ export type GameState = {
   checkedIds: number[];
 };
 
+export type PokemonCard = {
+  id: number;
+  name: string;
+  imgUrl: string;
+};
+
 /* export type Pokemon = {
   id: number;
   name: string;
