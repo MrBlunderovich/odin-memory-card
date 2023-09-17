@@ -45,6 +45,14 @@ export default {
           },
         },
       },
+      transitionProperty: {
+        bgc: "background-color",
+        /* bgc: {
+          transitionProperty: "background-color",
+          transitionTimingFunction: "ease",
+          transitionDuration: "150ms",
+        }, */
+      },
       /* transition: {
         flip: {
           transitionProperty: "transform",

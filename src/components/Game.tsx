@@ -21,14 +21,7 @@ export default function Game() {
   const cardContainerRef = useRef<HTMLDivElement | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
-  const {
-    pokemonCards,
-    numberOfCards,
-    score,
-    highScore,
-    inAction,
-    checkedIds,
-  } = useAppSelector((state) => state.game);
+  const { pokemonCards } = useAppSelector((state) => state.game);
   const pokemonCardsLength = pokemonCards.length;
 
   useEffect(() => {
@@ -66,15 +59,14 @@ export default function Game() {
     }, 350);
   }
 
-  console.log({
+  /* console.log({
     pokemonCards,
     numberOfCards,
     score,
     highScore,
     inAction,
     checkedIds,
-  });
-  //console.log("checkedIds: ", checkedIds);
+  }); */
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
