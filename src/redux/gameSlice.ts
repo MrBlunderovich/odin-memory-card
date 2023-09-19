@@ -28,8 +28,9 @@ export const fetchRandomPokemon = createAsyncThunk(
 );
 
 const initialState: GameState = {
-  numberOfCards: 0,
-  inAction: false,
+  numberOfCards: 5,
+  //inAction: false,
+  status: "standby",
   pokemonCards: [],
   score: 0,
   highScore: 0,
@@ -40,28 +41,40 @@ const gameSlice = createSlice({
   name: "game",
   initialState,
   reducers: {
-    startNewGame: (state, action: { type: string; payload: Difficulty }) => {
+    startNewGame: (
+      state,
+      action: { type: string; payload: Difficulty | undefined }
+    ) => {
       const difficulty = action.payload;
-      state.numberOfCards = difficultyMap[difficulty];
-      state.inAction = true;
+      difficulty && (state.numberOfCards = difficultyMap[difficulty]);
+      //state.numberOfCards = difficultyMap[difficulty];
+      //state.inAction = true;
+      state.status = "game";
       state.pokemonCards = [];
       state.checkedIds = [];
       state.score = 0;
     },
     abortGame: (state) => {
-      state.inAction = false;
+      //state.inAction = false;
+      state.status = "standby";
       state.pokemonCards = [];
       state.checkedIds = [];
       state.numberOfCards = 0;
       state.score = 0;
     },
+    continueGame: (state) => {
+      state.status = "game";
+      state.pokemonCards = [];
+      state.checkedIds = [];
+    },
     cardClick: (state, action) => {
       const cardId = action.payload.id;
       if (state.checkedIds.includes(cardId)) {
         console.log("round over(FAILURE)");
-        state.checkedIds = [];
-        state.score = 0;
-        state.pokemonCards = [];
+        //state.checkedIds = [];
+        //state.score = 0;
+        //state.pokemonCards = [];
+        state.status = "loss";
         return;
       }
       //////////////////////////////guard
@@ -73,8 +86,9 @@ const gameSlice = createSlice({
       }
       if (state.checkedIds.length === state.numberOfCards) {
         console.log("round over(SUCCESS)");
-        state.checkedIds = [];
-        state.pokemonCards = [];
+        //state.checkedIds = [];
+        //state.pokemonCards = [];
+        state.status = "win";
       }
     },
   },

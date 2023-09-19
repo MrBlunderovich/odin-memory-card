@@ -3,7 +3,8 @@ export type Difficulty = "easy" | "medium" | "hard";
 export type GameState = {
   // difficulty: Difficulty;
   numberOfCards: number;
-  inAction: boolean;
+  //inAction: boolean;
+  status: "standby" | "game" | "win" | "loss";
   pokemonCards: any[];
   score: number;
   highScore: number;

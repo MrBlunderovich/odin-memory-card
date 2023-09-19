@@ -11,8 +11,8 @@
   src: url("./Press_Start_2P.woff2");
 }
 
-a,
+/* a,
 button,
 input[type="radio"] {
   cursor: url(./glove_cursor_pointer.png) 14 0, pointer;
-}
+} */

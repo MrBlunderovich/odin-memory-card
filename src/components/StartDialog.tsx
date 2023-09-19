@@ -1,10 +1,10 @@
-import { ReactNode } from "react";
 import { gameActions } from "../redux/gameSlice";
 import { useAppDispatch } from "../redux/hooks";
-import ModalButton from "./ModalButton";
+import ModalButton from "./UI/ModalButton";
 import { Difficulty } from "../declarations";
+import FocusHoverWrapper from "./UI/FocusHoverWrapper";
 
-export default function StartForm() {
+export default function StartDialog() {
   const dispatch = useAppDispatch();
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -16,10 +16,10 @@ export default function StartForm() {
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
-      <h2 className="text-center text-base">What would you like to do?</h2>
+      <h2 className="text-center text-base">Let`s play!</h2>
       {/*  */}
       <FocusHoverWrapper>
-        <fieldset className="Radioset appearance-none border-none flex justify-center gap-8 my-4">
+        <fieldset className="Radioset appearance-none border-none flex justify-center gap-8 my-4 px-6">
           {/*  */}
           {["easy", "medium", "hard"].map((value, index) => (
             <label
@@ -48,7 +48,7 @@ export default function StartForm() {
   );
 }
 
-function FocusHoverWrapper({ children }: { children: ReactNode }) {
+/* function FocusHoverWrapper({ children }: { children: ReactNode }) {
   return (
     <span
       className="relative 
@@ -71,4 +71,4 @@ function FocusHoverWrapper({ children }: { children: ReactNode }) {
       {children}
     </span>
   );
-}
+} */

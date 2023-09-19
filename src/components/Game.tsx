@@ -5,6 +5,9 @@ import { fetchRandomPokemon, gameActions } from "../redux/gameSlice";
 import Loader from "./Loader";
 import { PokemonCard } from "../declarations";
 import Card from "./Card";
+import Modal from "./Modal";
+import WinDialog from "./WinDialog";
+import LossDialog from "./LossDialog";
 
 function fisherYatesShuffle(array: any[]) {
   let oldElement;
@@ -21,21 +24,23 @@ export default function Game() {
   const cardContainerRef = useRef<HTMLDivElement | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
-  const { pokemonCards } = useAppSelector((state) => state.game);
+  const { pokemonCards, status } = useAppSelector((state) => state.game);
   const pokemonCardsLength = pokemonCards.length;
 
   useEffect(() => {
-    if (pokemonCardsLength === 0) {
-      setIsLoading(true);
-      dispatch(fetchRandomPokemon())
-        .unwrap()
-        .finally(() => {
-          setIsLoading(false);
-        });
-    }
+    if (pokemonCardsLength !== 0) return;
+    //
+    setIsLoading(true);
+    dispatch(fetchRandomPokemon())
+      .unwrap()
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [pokemonCardsLength]);
 
   useEffect(() => {
+    if (status !== "game") return;
+    //
     setTimeout(() => {
       cardContainerRef.current?.classList.remove("flip");
     }, 150);
@@ -73,6 +78,16 @@ export default function Game() {
   ////////////////////////////////////////////////////////////////////////////////
   return (
     <>
+      {status === "win" && (
+        <Modal>
+          <WinDialog />
+        </Modal>
+      )}
+      {status === "loss" && (
+        <Modal>
+          <LossDialog />
+        </Modal>
+      )}
       <Header />
       <main className="mt-8 mx-auto px-4 lg:px-8 [perspective:1000px]">
         {isLoading ? (
