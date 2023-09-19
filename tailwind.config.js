@@ -18,8 +18,8 @@ export default {
         pressStart: "Press_Start_2P",
       },
       cursor: {
-        glovePointer: 'url("./glove_cursor_pointer.png") 14 0, pointer',
-        default: 'url("./glove_cursor.png"), auto',
+        glovePointer: 'url("/glove_cursor_pointer.png") 14 0, pointer',
+        default: 'url("/glove_cursor.png"), auto',
       },
       animation: {
         grow: "grow 300ms linear",

@@ -4,11 +4,11 @@
 
 @font-face {
   font-family: Pokemon;
-  src: url("./Pokemon.ttf") format("opentype");
+  src: url("/Pokemon.ttf") format("opentype");
 }
 @font-face {
   font-family: "Press_Start_2P";
-  src: url("./Press_Start_2P.woff2");
+  src: url("/Press_Start_2P.woff2");
 }
 
 /* a,
