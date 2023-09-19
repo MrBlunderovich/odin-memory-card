@@ -42,7 +42,14 @@ export default function StartDialog() {
         <ModalButton type="submit">START GAME</ModalButton>
       </FocusHoverWrapper>
       <FocusHoverWrapper>
-        <ModalButton type="button">GITHUB REPO</ModalButton>
+        <ModalButton
+          type="button"
+          onClick={() =>
+            window.open("https://github.com/MrBlunderovich/odin-memory-card")
+          }
+        >
+          GITHUB REPO
+        </ModalButton>
       </FocusHoverWrapper>
     </form>
   );
